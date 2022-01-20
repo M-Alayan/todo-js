@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>To-do List</title>
+        <link href="style.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript">
+    function createtask(){
+        debugger;
+        var box=document.createElement("div");
+        box.setAttribute("class","TasksBox");
+        var mainbox=document.getElementById("Tasks");
+        mainbox.appendChild(box);
+
+        var chk=document.createElement("input");
+        chk.setAttribute("type","checkbox");
+         chk.setAttribute("onchange","changestyle(this)");
+        var txt=document.createElement("span");
+        txt.setAttribute("class","Active")
+        var v=document.getElementById("txtNewTask").value;
+        var txtv=document.createTextNode(v);
+        txt.appendChild(txtv);
+        box.appendChild(chk);
+        box.appendChild(txt);
+        document.getElementById("txtNewTask").value="";
+
+    }
+    function changestyle(x){
+        debugger;
+        var box=x.parentNode;
+        // if(x.checked==true){
+            box.getElementsByTagName("span")[0].style.textDecoration="line-through"
+        // }
+    }
+    function active(){
+        allbox()
+        var mainbox=document.getElementById("Tasks");
+        var chk=mainbox.getElementsByTagName("input");
+        for(var i=0;i< chk.length ;i++){
+            if(chk[i].checked==true){
+                chk[i].parentNode.style.display="none"
+            }
+        
+        }
+    }
+    function complet(){
+        allbox()
+        var mainbox=document.getElementById("Tasks");
+        var chk=mainbox.getElementsByTagName("input");
+        for(var i=0;i< chk.length ;i++){
+            if(chk[i].checked==false){
+                chk[i].parentNode.style.display="none"
+            }
+        }
+    }
+    function allbox(){
+        debugger;
+      var box=  document.getElementsByClassName("TasksBox");
+        for(var i=0;i<box.length;i++){
+            box[i].style.display="block";
+        }
+    }
+
+
+</script>
+            
+    </head>
+    <body>
+        <div class="container">
+
+            <div class="NewTaskBox">
+                <input type="text" id="txtNewTask"  placeholder="New Task..." />
+            </div>
+            <div class="ActionBox">
+                <button id="txtNewTask" class="btn ButtonSubmit" onclick="createtask()" >New Task</button>
+            </div>
+            <div class="TabBox">
+                <span class="tabItems" onclick="allbox()">
+                    All
+                </span>
+                <span class="tabItems" onclick="active()" >
+                    Active
+                </span>
+                <span class="tabItems" onclick="complet()" >
+                    Completed
+                </span>
+            </div>
+            <div id="Tasks">
+            
+        </div>
+        </div>
+
+    </body>
+</html>
